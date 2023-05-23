@@ -1,0 +1,17 @@
+subfinder -d jnu.ac.bd -o jnu.ac.bd/jnu.ac.bd/subfinder.txt
+
+cat jnu.ac.bd/jnu.ac.bd/subfinder.txt | httpx -u -status-code -location -mc 200,302 -o jnu.ac.bd/jnu.ac.bd/httpx.txt
+
+nuclei -u https://jnu.ac.bd -t /home/hunter/nuclei-templates/http/vulnerabilities -o jnu.ac.bd/jnu.ac.bd/nuclei-vulnerabilities.txt
+nuclei -u https://jnu.ac.bd -t /home/hunter/nuclei-templates/http/cves -o jnu.ac.bd/jnu.ac.bd/nuclei-cves.txt
+nuclei -u https://jnu.ac.bd -t /home/hunter/nuclei-templates -o jnu.ac.bd/jnu.ac.bd/nuclei-all.txt
+
+katana -u https://jnu.ac.bd/ -rl 50 -aff -o jnu.ac.bd/jnu.ac.bd/katana.txt
+
+sqlmap -u jnu.ac.bd --batch --crawl=2
+
+gospider -s https://jnu.ac.bd -o jnu.ac.bd/jnu.ac.bd/gospider.txt
+
+sudo dirsearch --full-url --format plain -o jnu.ac.bd/dirsearch.txt -e php,html,js --exclude-extensions=xml,ico -i 200,301 -r --deep-recursive 3 -t 20 -w /usr/share/wordlists/SecLists/Discovery/Web-Content/common.txt -u https://faculty.erp.jnu.ac.bd
+
+nmap -sV -sC -T3 139.59.112.45 -o jnu.ac.bd/nmap.txt
